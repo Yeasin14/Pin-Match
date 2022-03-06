@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" type="text" id="pin-display">
+                    <button class="generate-btn" onclick="generate()">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input class="form-control" type="text" id="display">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div class="button" onclick="calculate('7')">7</div>
+                              <div class="button" onclick="calculate('8')">8</div>
+                              <div class="button" onclick="calculate('9')">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="calculate('4')">4</div>
+                              <div class="button" onclick="calculate('5')">5</div>
+                              <div class="button" onclick="calculate('6')">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="calculate('1')">1</div>
+                              <div class="button" onclick="calculate('2')">2</div>
+                              <div class="button" onclick="calculate('3')">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="calculate('00')">00</div>
+                                <div class="button" onclick="calculate('0')">0</div>
+                                <div class="button" onclick="delateMe()">C</div>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-btn" onclick="pinMatch()">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p class="notify" id="incorret">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify" id="corret">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+
+<!-- js start -->
+
+
+<script>
+
+    function generate(){
+        let pin = Math.floor(Math.random() * 10000) + 1;
+        document.getElementById("pin-display").value = pin ;
+    }
+    
+    function calculate(newValue){
+        document.getElementById("display").value += newValue;
+    }
+    
+    function delateMe(){
+        document.getElementById("display").value = "";
+    }
+    
+    function pinMatch(){
+        let generatePin = document.getElementById("pin-display").value;
+        let matchPin = document.getElementById("display").value;
+        if(generatePin == matchPin){
+            document.getElementById("corret").style.display = "block";
+            document.getElementById("incorret").style.display = "none";
+        }
+        if(generatePin !== matchPin){
+            document.getElementById("incorret").style.display = "block";
+            document.getElementById("corret").style.display = "none";
+        }
+    
+    }
+    
+    </script>
+
+
+
+
+
+
+</body>
+</html>
